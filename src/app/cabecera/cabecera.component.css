@@ -1,0 +1,140 @@
+
+header {
+        
+    display: inline-flex;
+    background:rgb(0, 0, 0);
+    height:10%;
+    width: 100%;
+}
+#inferior{
+ margin: 0px;
+  background: black;
+ color: white;
+ height: 14%;
+ width: 100%;
+
+}
+#hola1{
+  margin: 0px;
+}
+#hola2{
+  display: none;
+  opacity: 1;
+}
+.cubo1{
+  background: black;
+  width:25%;
+  height: 100%;
+  display: block;
+  margin-right: 0.5%;
+
+}
+.cubo2{
+  
+  background: black;
+  width:35%;
+  height: 100%;
+   margin-right: 0.5%;
+   color: white;
+   display: flex;
+}
+.cubo3{
+  background: black;
+  width:39%;
+  height: 100%;
+  color: white;
+  display: flex;
+}
+.titulo{
+  color: white;
+    
+    font-family: Oswald, Arial;
+    width: 100%;
+    font-size: 1em;
+    
+    padding-top: 1%;
+    
+    padding-left: 5%;
+    display: grid;
+}
+.super{
+  width: 100%; height: 100%;
+}
+
+
+.reloj {
+  color: white;
+    display: flex;
+    font-family: Oswald, Arial;
+    width: 100%;
+    font-size: 2em;
+    /* text-align: center; */
+    /* padding-left: 50px; */
+    
+   padding-top: 2%;
+    padding-left: 10%;
+
+}
+
+.reloj .caja-segundos {
+  display: flex;
+}
+
+.reloj .segundos,
+.reloj .ampm {
+  font-size: 2rem;
+  display: block;
+}
+.segundos{margin-right: 5px;}
+
+.fecha {
+      display: flex;
+    font-family: Oswald, Arial;
+    text-align: center;
+     
+    padding-left: 35%;
+    
+    color: white;
+    width: 100%;
+}
+.relo{
+  width: 30px;
+  margin-right: 15px;
+}
+.calendario{
+  width: 20px;
+  margin-right: 15px;
+}
+.bus{
+ width: 60px;
+right: 5px;
+position: absolute;
+}
+.caja{
+  background: black;
+}
+.velocidad{
+   display: grid;
+    font-family: Oswald, Arial;
+    text-align: center;
+    
+    color: white;
+    width: 30%;
+}
+#veloci{
+  font-size: 2em
+}
+.alerts{
+   display: grid;
+    font-family: Oswald, Arial;
+    text-align: center;
+    
+    color: white;
+    width: 70%;
+}
+.alerta{
+  font-size: 1em;
+}
+#info{
+  display: none;
+}
