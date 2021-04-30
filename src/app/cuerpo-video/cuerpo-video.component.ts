@@ -1,72 +1,91 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
+import { environment } from "../../environments/environment"
 
+declare var $: any
 @Component({
   selector: 'app-cuerpo-video',
   templateUrl: './cuerpo-video.component.html',
   styleUrls: ['./cuerpo-video.component.css']
 })
 export class CuerpoVideoComponent implements OnInit {
-  reproductor :any
+  reproductor: any
+  arrayimg = environment.imagenes
+  ayuda = 0
+  arrayefcent = ['animate__fadeIn', 'animate__fadeInDown', 'animate__fadeInDownBig', 'animate__fadeInLeft']
+  arrayefcsal = ['animate__fadeOut', 'animate__fadeOutLeft', 'animate__fadeOutDown', 'animate__fadeOutDownBig']
+  animacion: any
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.pido(3);
     this.reproductor = document.getElementById("reproductor")
-   // this.reproductor.src = "./assets/video/" + this.list[0] ;
+    // this.reproductor.src = "./assets/video/" + this.list[0] ;
     this.empezar()
-   /* document.getElementById("hola2"). css("display", "none")
-    $("#hola1").css("display", "block")*/
+    this.finalizaAnimacion()
+    /* document.getElementById("hola2"). css("display", "none")
+     $("#hola1").css("display", "block")*/
 
-    
-    var ayuda = 0
+
+
     var ayuda1 = 0
-    var arrayimg = ['c', 'b', 'a', 'c']
-    var arrayefcent = ['fadeIn', 'fadeInDown', 'fadeInDownBig', 'fadeInLeft']
-    var arrayefcsal = ['fadeOut', 'fadeOutLeft', 'fadeOutDown', 'fadeOutDownBig']
 
-    /* setInterval(function () {
-       var x = this.getRandomArbitrary(0, arrayefcent.length - 1)
-       var y = this.getRandomArbitrary(0, arrayefcsal.length - 1)
-       if (ayuda >= arrayimg.length - 1) {
-         ayuda = 0
-       } else {
-         $('.ef').addClass(arrayefcsal[y]).one(animationEnd, function () {
-           $(".super").attr('src', arrayimg[ayuda] + ".gif")
-           $('.ef').removeClass(arrayefcsal[y])
-           $('.ef').addClass(arrayefcent[x]).one(animationEnd, function () {
-             $('.ef').removeClass(arrayefcent[x]);
-           });
-         });
- 
- 
- 
- 
-         ayuda = ayuda + 1
- 
-       }
-     }
-       , 15000);
-     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';*/
 
+    setInterval(() => {
+      var x = this.getRandomArbitrary(0, this.arrayefcent.length - 1)
+      var y = this.getRandomArbitrary(0, this.arrayefcsal.length - 1)
+      this.animacion = this.arrayefcsal[y]
+      if (this.ayuda >= this.arrayimg.length - 1) {
+        this.ayuda = 0
+      } else {
+
+
+        var p: any = document.querySelector(".ef")
+
+        p.classList.add('animate__animated', this.arrayefcsal[y])
+
+        var m: any = document.getElementById("super")
+        m.setAttribute("src", "assets/" + this.arrayimg[this.ayuda] + ".gif")
+
+        this.ayuda = this.ayuda + 1
+
+      }
+    }
+      , environment.intevalo);
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
+  }
+  finalizaAnimacion() {
+    var x = this.getRandomArbitrary(0, this.arrayefcent.length - 1)
+    var y = this.getRandomArbitrary(0, this.arrayefcsal.length - 1)
+    var p: any = document.querySelector(".ef")
+    p.addEventListener('animationend', () => {
+      $("#inferior").removeClass(this.animacion);
+     ;
+      var z: any = document.querySelector(".ef")
+      z.classList.add('animate__animated', this.arrayefcent[x])
+      p.removeEventListener('click', this)
+    });
   }
   openDialog() {
     const dialogRef = this.dialog.open(ModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      this.playlist(result.length-2, result)
+      this.playlist(result.length - 2, result)
       this.empezar()
     });
   }
-  empezar(){
+
+  empezar() {
     this.reproductor.play()
   }
-  detener(){
+  detener() {
     this.reproductor.pause()
   }
   getRandomArbitrary(min, max) {
+
     return Math.floor(Math.random() * (max - min) + min);
   }
   playlist(conta, videos) {
@@ -78,7 +97,7 @@ export class CuerpoVideoComponent implements OnInit {
       info = document.getElementById("info");
 
     //info.innerHTML = "Vídeo: " + videos[cont];
-    reproductor.src = "./assets/video/" + videos[cont] 
+    reproductor.src = "./assets/video/" + videos[cont]
 
 
     reproductor.addEventListener("ended", function () {
@@ -88,12 +107,12 @@ export class CuerpoVideoComponent implements OnInit {
         this.src = "./assets/video/" + videos[cont]
 
         this.play()
-       
+
       } else {
         cont = 0
-        this.src = "./assets/video/" + videos[cont] 
+        this.src = "./assets/video/" + videos[cont]
         this.play()
-        
+
       }
       /* var nombreActual = info.innerHTML.split(": ")[1];
        var actual = videos.indexOf(nombreActual);

@@ -13,5 +13,7 @@ export const environment = {
       lista:'Lista3',
       list:['1.mp4','2.mp4','3.mp4']
     }
-    ]
+    ],
+    imagenes: ['c', 'b', 'a', 'c'],
+    intevalo:10000
 };
