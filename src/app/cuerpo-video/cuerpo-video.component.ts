@@ -21,7 +21,8 @@ export class CuerpoVideoComponent implements OnInit {
   ngOnInit(): void {
     this.pido(3);
     this.reproductor = document.getElementById("reproductor")
-    // this.reproductor.src = "./assets/video/" + this.list[0] ;
+    console.log( environment.reproductor[0].lista[0])
+     this.reproductor.src = "./assets/video/" +  environment.reproductor[0].list[0];
     this.empezar()
     this.finalizaAnimacion()
     /* document.getElementById("hola2"). css("display", "none")
