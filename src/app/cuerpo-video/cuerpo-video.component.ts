@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { environment } from "../../environments/environment"
+import { Socket } from 'ngx-socket-io';
 
 declare var $: any
 @Component({
@@ -16,13 +17,18 @@ export class CuerpoVideoComponent implements OnInit {
   arrayefcent = ['animate__fadeIn', 'animate__fadeInDown', 'animate__fadeInDownBig', 'animate__fadeInLeft']
   arrayefcsal = ['animate__fadeOut', 'animate__fadeOutLeft', 'animate__fadeOutDown', 'animate__fadeOutDownBig']
   animacion: any
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private socket: Socket) {
+
+    socket.on('datos', (data) => {
+      console.log(data)
+    })
+  }
 
   ngOnInit(): void {
     this.pido(3);
     this.reproductor = document.getElementById("reproductor")
-    console.log( environment.reproductor[0].lista[0])
-     this.reproductor.src = "./assets/video/" +  environment.reproductor[0].list[0];
+    console.log(environment.reproductor[0].lista[0])
+    this.reproductor.src = "./assets/video/" + environment.reproductor[0].list[0];
     this.empezar()
     this.finalizaAnimacion()
     /* document.getElementById("hola2"). css("display", "none")
@@ -63,7 +69,7 @@ export class CuerpoVideoComponent implements OnInit {
     var p: any = document.querySelector(".ef")
     p.addEventListener('animationend', () => {
       $("#inferior").removeClass(this.animacion);
-     ;
+      ;
       var z: any = document.querySelector(".ef")
       z.classList.add('animate__animated', this.arrayefcent[x])
       p.removeEventListener('click', this)
