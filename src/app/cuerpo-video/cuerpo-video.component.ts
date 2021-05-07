@@ -21,10 +21,25 @@ export class CuerpoVideoComponent implements OnInit {
 
     socket.on('datos', (data) => {
       console.log(data)
+
+      document.getElementById("caja2").style.display = 'block';
+      document.getElementById("caja").style.display = 'none';
+      var p: any = document.querySelector(".ef2")
+
+      p.classList.add('animate__animated', 'animate__fadeOutLeft')
+      var m: any = document.getElementById("super")
+      m.setAttribute("src", "assets/" + data.video + ".gif")
+
+      p.addEventListener('animationend', () => {
+        document.getElementById("caja2").style.display = 'none';
+        document.getElementById("caja").style.display = 'block';
+      });
     })
   }
 
   ngOnInit(): void {
+    $(".caja2").css("display", "block")
+    $(".caja").css("display", "none")
     this.pido(3);
     this.reproductor = document.getElementById("reproductor")
     console.log(environment.reproductor[0].lista[0])
