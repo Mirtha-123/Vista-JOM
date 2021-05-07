@@ -44,6 +44,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
 import { ModalComponent } from './modal/modal.component';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +75,8 @@ import { ModalComponent } from './modal/modal.component';
     MatChipsModule,
     MatNativeDateModule, MatRippleModule,
     MatGridListModule,
-    MatSliderModule
+    MatSliderModule,
+    SocketIoModule.forRoot(config)
   ],
   entryComponents: [
     ModalComponent
