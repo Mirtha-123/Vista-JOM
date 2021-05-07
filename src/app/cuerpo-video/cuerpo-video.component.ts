@@ -22,8 +22,8 @@ export class CuerpoVideoComponent implements OnInit {
     socket.on('datos', (data) => {
       console.log(data)
 
-      document.getElementById("caja2").style.display = 'block';
-      document.getElementById("caja").style.display = 'none';
+      $(".caja2").css("display", "block")
+      $(".caja").css("display", "none")
       var p: any = document.querySelector(".ef2")
 
       p.classList.add('animate__animated', 'animate__fadeOutLeft')
@@ -31,8 +31,8 @@ export class CuerpoVideoComponent implements OnInit {
       m.setAttribute("src", "assets/" + data.video + ".gif")
 
       p.addEventListener('animationend', () => {
-        document.getElementById("caja2").style.display = 'none';
-        document.getElementById("caja").style.display = 'block';
+        $(".caja2").css("display", "none")
+        $(".caja").css("display", "block")
       });
     })
   }
