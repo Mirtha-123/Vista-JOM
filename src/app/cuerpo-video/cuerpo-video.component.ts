@@ -32,7 +32,7 @@ export class CuerpoVideoComponent implements OnInit {
         $(".caja2").css("display", "none")
         $(".caja").css("display", "block")
 
-      }, 3000);
+      }, environment.IntervaloImagen);
 
     })
   }

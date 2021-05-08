@@ -19,7 +19,8 @@ export const environment = {
     }
   ],
   imagenes: ['c', 'b', 'a', 'c'],
-  intevalo:10000
+  intevalo:10000,
+  IntervaloImagen: 3000
 };
 
 /*
