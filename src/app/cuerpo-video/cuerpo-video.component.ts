@@ -24,16 +24,16 @@ export class CuerpoVideoComponent implements OnInit {
 
       $(".caja2").css("display", "block")
       $(".caja").css("display", "none")
-      var p: any = document.querySelector(".ef2")
-
-      p.classList.add('animate__animated', 'animate__fadeOutLeft')
-      var m: any = document.getElementById("super")
+      var m: any = document.getElementById("super2")
       m.setAttribute("src", "assets/" + data.video + ".gif")
 
-      p.addEventListener('animationend', () => {
+      setTimeout(() => {
+
         $(".caja2").css("display", "none")
         $(".caja").css("display", "block")
-      });
+
+      }, 3000);
+
     })
   }
 
