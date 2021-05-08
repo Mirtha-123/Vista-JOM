@@ -27,7 +27,7 @@ export class CuerpoVideoComponent implements OnInit {
       var p: any = document.querySelector(".ef2")
 
       p.classList.add('animate__animated', 'animate__fadeOutLeft')
-      var m: any = document.getElementById("super")
+      var m: any = document.getElementById("super2")
       m.setAttribute("src", "assets/" + data.video + ".gif")
 
       p.addEventListener('animationend', () => {
@@ -38,8 +38,8 @@ export class CuerpoVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $(".caja2").css("display", "block")
-    $(".caja").css("display", "none")
+    $(".caja2").css("display", "none")
+    $(".caja").css("display", "block")
     this.pido(3);
     this.reproductor = document.getElementById("reproductor")
     console.log(environment.reproductor[0].lista[0])
