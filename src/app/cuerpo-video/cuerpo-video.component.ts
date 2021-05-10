@@ -125,7 +125,7 @@ export class CuerpoVideoComponent implements OnInit {
 
     reproductor.addEventListener("ended", function () {
 
-      if (cont < videos.length - 1) {
+      if (cont < videos.length - 1) { 
         cont++
         this.src = "./" + environment.rutaSrc + videos[cont]
 
