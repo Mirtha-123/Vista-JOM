@@ -25,7 +25,7 @@ export class CuerpoVideoComponent implements OnInit {
       $(".caja2").css("display", "block")
       $(".caja").css("display", "none")
       var m: any = document.getElementById("super2")
-      m.setAttribute("src", "assets/" + data.video + ".gif")
+      m.setAttribute("src", environment.rutaSrc + data.video + ".gif")
 
       setTimeout(() => {
 
@@ -69,7 +69,7 @@ export class CuerpoVideoComponent implements OnInit {
         p.classList.add('animate__animated', this.arrayefcsal[y])
 
         var m: any = document.getElementById("super")
-        m.setAttribute("src", "assets/" + this.arrayimg[this.ayuda] + ".gif")
+        m.setAttribute("src", environment.rutaSrc + this.arrayimg[this.ayuda] + ".gif")
 
         this.ayuda = this.ayuda + 1
 
@@ -120,20 +120,20 @@ export class CuerpoVideoComponent implements OnInit {
       info = document.getElementById("info");
 
     //info.innerHTML = "Vídeo: " + videos[cont];
-    reproductor.src = "./assets/video/" + videos[cont]
+    reproductor.src = "./" + environment.rutaSrc + "/video/" + videos[cont]
 
 
     reproductor.addEventListener("ended", function () {
 
       if (cont < videos.length - 1) {
         cont++
-        this.src = "./assets/video/" + videos[cont]
+        this.src = "./" + environment.rutaSrc + "/video/" + videos[cont]
 
         this.play()
 
       } else {
         cont = 0
-        this.src = "./assets/video/" + videos[cont]
+        this.src = "./" + environment.rutaSrc + "/video/" + videos[cont]
         this.play()
 
       }
