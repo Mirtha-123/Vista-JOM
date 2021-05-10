@@ -17,5 +17,5 @@ export const environment = {
   imagenes: ['c', 'b', 'a', 'c'],
   intevalo: 10000,
   IntervaloImagen: 3000,
-  rutaSrc: '/media/pi/USB/Oficial micros/videos/paradas/'
+  rutaSrc: '/media/pi/USB/Oficial micros/videos'
 };
