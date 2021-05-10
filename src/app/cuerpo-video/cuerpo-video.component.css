@@ -1,5 +1,7 @@
 body {
   height: 72%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 #botonvideo {

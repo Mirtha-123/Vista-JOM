@@ -42,8 +42,9 @@ export class CuerpoVideoComponent implements OnInit {
     $(".caja").css("display", "block")
     this.pido(3);
     this.reproductor = document.getElementById("reproductor")
-    console.log(environment.reproductor[0].lista[0])
-    this.reproductor.src = "./assets/video/" + environment.reproductor[0].list[0];
+    console.log(environment.reproductor[0].list[0])
+
+    this.playlist(environment.reproductor[0].list.length - 2, environment.reproductor[0].list)
     this.empezar()
     this.finalizaAnimacion()
     /* document.getElementById("hola2"). css("display", "none")
