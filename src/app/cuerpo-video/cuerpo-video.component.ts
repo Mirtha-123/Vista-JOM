@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { environment } from "../../environments/environment"
 import { Socket } from 'ngx-socket-io';
+import { CookieService } from 'ngx-cookie-service';
+
 
 declare var $: any
 @Component({
@@ -17,7 +19,17 @@ export class CuerpoVideoComponent implements OnInit {
   arrayefcent = ['animate__fadeIn', 'animate__fadeInDown', 'animate__fadeInDownBig', 'animate__fadeInLeft']
   arrayefcsal = ['animate__fadeOut', 'animate__fadeOutLeft', 'animate__fadeOutDown', 'animate__fadeOutDownBig']
   animacion: any
-  constructor(public dialog: MatDialog, private socket: Socket) {
+  constructor(public dialog: MatDialog, private socket: Socket, private cookieService: CookieService) {
+
+    $(window).on("beforeunload", () => {
+
+      var reproductor: any = document.getElementById("reproductor")
+      console.log($('#reproductor').attr('currentTime'))
+      this.cookieService.set('Avance', $('#reproductor')[0].currentTime);
+
+
+    });
+
 
     socket.on('datos', (data) => {
       console.log(data)
@@ -38,21 +50,36 @@ export class CuerpoVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     $(".caja2").css("display", "none")
     $(".caja").css("display", "block")
-    this.pido(3);
-    this.reproductor = document.getElementById("reproductor")
-    console.log(environment.reproductor[0].list[0])
 
-    this.playlist(environment.reproductor[0].list.length - 2, environment.reproductor[0].list)
+    this.reproductor = document.getElementById("reproductor")
+    console.log(this.cookieService.get('Lista'), this.cookieService.get('Video'), this.cookieService.get('Avance'))
+    if (this.cookieService.get('Lista') && this.cookieService.get('Video') && this.cookieService.get('Avance')) {
+
+      environment.reproductor.forEach(element => {
+        if (this.cookieService.get('Lista') == element.lista) {
+          this.playlist(element.list.length - 2, element.list)
+
+          this.reproductor.src = "./" + environment.rutaSrc + this.cookieService.get('Video')
+          this.reproductor.currentTime = this.cookieService.get('Avance');
+
+        }
+      });
+    } else {
+      this.cookieService.set('Lista', environment.reproductor[0].lista);
+      this.playlist(environment.reproductor[0].list.length - 1, environment.reproductor[0].list)
+    }
+
+
+
+
+
     this.empezar()
     this.finalizaAnimacion()
-    /* document.getElementById("hola2"). css("display", "none")
-     $("#hola1").css("display", "block")*/
 
 
-
-    var ayuda1 = 0
 
 
     setInterval(() => {
@@ -95,9 +122,16 @@ export class CuerpoVideoComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalComponent);
 
     dialogRef.afterClosed().subscribe(result => {
+      environment.reproductor.forEach(element => {
+        if (result == element.lista) {
+          this.playlist(element.list.length - 2, element.list)
+          this.empezar()
+        }
+      });
       console.log(`Dialog result: ${result}`);
-      this.playlist(result.length - 2, result)
-      this.empezar()
+      this.cookieService.set('Lista', result);
+
+
     });
   }
 
@@ -121,21 +155,21 @@ export class CuerpoVideoComponent implements OnInit {
 
     //info.innerHTML = "Vídeo: " + videos[cont];
     reproductor.src = "./" + environment.rutaSrc + videos[cont]
+    
 
+    reproductor.addEventListener("ended", () => {
 
-    reproductor.addEventListener("ended", function () {
-
-      if (cont < videos.length - 1) { 
+      if (cont < videos.length - 1) {
         cont++
-        this.src = "./" + environment.rutaSrc + videos[cont]
-
-        this.play()
+        reproductor.src = "./" + environment.rutaSrc + videos[cont]
+        this.cookieService.set('Video', videos[cont]);
+        reproductor.play()
 
       } else {
         cont = 0
-        this.src = "./" + environment.rutaSrc + videos[cont]
-        this.play()
-
+        reproductor.src = "./" + environment.rutaSrc + videos[cont]
+        reproductor.play()
+        this.cookieService.set('Video', videos[cont]);
       }
       /* var nombreActual = info.innerHTML.split(": ")[1];
        var actual = videos.indexOf(nombreActual);
@@ -165,10 +199,6 @@ export class CuerpoVideoComponent implements OnInit {
     return false;
 
   }
-  pido(cast) {
 
-    var valux = cast;
-    //socket.emit('pido', valux);
-  }
 
 }

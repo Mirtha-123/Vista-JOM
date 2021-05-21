@@ -43,6 +43,8 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
 import { ModalComponent } from './modal/modal.component';
+import { CookieService } from 'ngx-cookie-service';
+
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
@@ -82,7 +84,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     ModalComponent
   ],
 
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
