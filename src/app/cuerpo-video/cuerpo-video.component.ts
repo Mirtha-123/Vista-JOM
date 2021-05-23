@@ -60,7 +60,7 @@ export class CuerpoVideoComponent implements OnInit {
 
       environment.reproductor.forEach(element => {
         if (this.cookieService.get('Lista') == element.lista) {
-          this.playlist(element.list.length - 1, element.list)
+          this.playlist(this.cookieService.get('Cont'), element.list)
 
           this.reproductor.src = "./" + environment.rutaSrc + this.cookieService.get('Video')
           this.reproductor.currentTime = this.cookieService.get('Avance');
@@ -155,7 +155,7 @@ export class CuerpoVideoComponent implements OnInit {
 
     //info.innerHTML = "Vídeo: " + videos[cont];
     reproductor.src = "./" + environment.rutaSrc + videos[cont]
-    
+
 
     reproductor.addEventListener("ended", () => {
 
@@ -163,13 +163,17 @@ export class CuerpoVideoComponent implements OnInit {
         cont++
         reproductor.src = "./" + environment.rutaSrc + videos[cont]
         this.cookieService.set('Video', videos[cont]);
+        this.cookieService.set('Cont', cont);
         reproductor.play()
 
       } else {
         cont = 0
+
         reproductor.src = "./" + environment.rutaSrc + videos[cont]
-        reproductor.play()
         this.cookieService.set('Video', videos[cont]);
+        this.cookieService.set('Cont', cont);
+        reproductor.play()
+
       }
       /* var nombreActual = info.innerHTML.split(": ")[1];
        var actual = videos.indexOf(nombreActual);
