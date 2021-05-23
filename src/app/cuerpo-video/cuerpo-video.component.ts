@@ -60,7 +60,7 @@ export class CuerpoVideoComponent implements OnInit {
 
       environment.reproductor.forEach(element => {
         if (this.cookieService.get('Lista') == element.lista) {
-          this.playlist(element.list.length - 2, element.list)
+          this.playlist(element.list.length - 1, element.list)
 
           this.reproductor.src = "./" + environment.rutaSrc + this.cookieService.get('Video')
           this.reproductor.currentTime = this.cookieService.get('Avance');
